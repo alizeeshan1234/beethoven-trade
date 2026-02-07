@@ -9,7 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "beethoven"
 
 [features]
-default = ["manifest-swap", "gamma-swap", "heaven-swap", "kamino-deposit"]
+default = ["manifest-swap", "gamma-swap", "heaven-swap", "kamino-deposit", "jupiter-deposit"]
 cpi = ["no-entrypoint"]
 no-entrypoint = []
 no-idl = []

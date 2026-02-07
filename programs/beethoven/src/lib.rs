@@ -14,7 +14,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("CreqYFgN6nKYaBBuWvxs83PVJg6HSu1YYj3rriu7xNQu");
+declare_id!("2JEPZyQpK6HARPgvq1X2ZVh4U9cE7s9rQZ3BpN2Ho3oW");
 
 #[program]
 pub mod beethoven {

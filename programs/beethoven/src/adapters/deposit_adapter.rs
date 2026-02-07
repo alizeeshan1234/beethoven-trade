@@ -47,9 +47,16 @@ pub fn execute_deposit<'info>(
         }
         #[cfg(feature = "jupiter-deposit")]
         DepositProtocol::Jupiter => {
-            require!(accounts.len() >= 4, ErrorCode::InvalidParameter);
+            // Jupiter Earn deposit:
+            //   discriminator(8) + amount(8) = 16 bytes
+            //   Accounts (17): signer, depositorTokenAccount, recipientTokenAccount, mint,
+            //     lendingAdmin, lending, fTokenMint, supplyTokenReservesLiquidity,
+            //     lendingSupplyPositionOnLiquidity, rateModel, vault, liquidity,
+            //     liquidityProgram, rewardsRateModel, tokenProgram,
+            //     associatedTokenProgram, systemProgram
+            require!(accounts.len() >= 17, ErrorCode::InvalidParameter);
             let mut data = Vec::with_capacity(16);
-            data.extend_from_slice(&[0xd3, 0xb4, 0x06, 0x5e, 0xc4, 0xa3, 0x71, 0x5c]);
+            data.extend_from_slice(&[242, 35, 198, 137, 82, 225, 242, 182]); // deposit
             data.extend_from_slice(&amount.to_le_bytes());
             invoke_protocol_cpi(protocol_program, accounts, data)
         }
@@ -94,9 +101,12 @@ pub fn execute_withdraw<'info>(
         }
         #[cfg(feature = "jupiter-deposit")]
         DepositProtocol::Jupiter => {
-            require!(accounts.len() >= 4, ErrorCode::InvalidParameter);
+            // Jupiter Earn withdraw:
+            //   discriminator(8) + amount(8) = 16 bytes
+            //   Accounts (17): same layout as deposit
+            require!(accounts.len() >= 17, ErrorCode::InvalidParameter);
             let mut data = Vec::with_capacity(16);
-            data.extend_from_slice(&[0xa1, 0xc2, 0xd3, 0xe4, 0xf5, 0x06, 0x17, 0x28]);
+            data.extend_from_slice(&[183, 18, 70, 156, 148, 109, 161, 34]); // withdraw
             data.extend_from_slice(&amount.to_le_bytes());
             invoke_protocol_cpi(protocol_program, accounts, data)
         }

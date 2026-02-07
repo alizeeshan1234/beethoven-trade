@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-beethoven = "CreqYFgN6nKYaBBuWvxs83PVJg6HSu1YYj3rriu7xNQu"
+beethoven = "2JEPZyQpK6HARPgvq1X2ZVh4U9cE7s9rQZ3BpN2Ho3oW"
 
 [programs.localnet]
 beethoven = "9aGjyuCAJC87stTCbXFUtg8wp1wQoy3iCzmCb84pGP9s"

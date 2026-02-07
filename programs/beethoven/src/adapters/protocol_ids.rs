@@ -62,9 +62,9 @@ pub mod deposit_protocols {
     pub const KAMINO: Pubkey = pubkey!("KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD");
 
     /// Jupiter Earn — `beethoven_sdk::jupiter::JUPITER_EARN_PROGRAM_ID`
-    /// Currently zeroed in upstream; using known Jupiter program ID
+    /// Devnet program ID for Jupiter Earn (lending/yield)
     #[cfg(feature = "jupiter-deposit")]
-    pub const JUPITER: Pubkey = Pubkey::new_from_array([0u8; 32]);
+    pub const JUPITER: Pubkey = pubkey!("7tjE28izRUjzmxC1QNXnNwcc4N82CNYCexf3k8mw67s3");
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
