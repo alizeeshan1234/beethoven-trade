@@ -9,6 +9,8 @@ use crate::math::oracle::get_price;
 use crate::state::{Exchange, PerpMarket, PerpPosition, UserAccount, VaultState};
 use crate::state::perp_position::PositionSide;
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct LiquidatePerp<'info> {
     #[account(mut)]
@@ -62,13 +64,13 @@ pub struct LiquidatePerp<'info> {
         mut,
         constraint = vault_token_account.key() == vault_state.token_account @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     /// Liquidator receives bonus to this account
     #[account(mut)]
-    pub liquidator_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub liquidator_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<LiquidatePerp>) -> Result<()> {

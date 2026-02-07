@@ -5,6 +5,8 @@ use crate::events::RepayExecuted;
 use crate::math::interest::{accrue_interest, get_borrow_balance};
 use crate::state::{LendingPool, LendingPosition};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct Repay<'info> {
     #[account(mut)]
@@ -29,15 +31,15 @@ pub struct Repay<'info> {
         mut,
         constraint = vault_token_account.key() == lending_pool.vault @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     #[account(
         mut,
         constraint = user_token_account.owner == owner.key() @ ErrorCode::Unauthorized,
     )]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<Repay>, amount: u64) -> Result<()> {

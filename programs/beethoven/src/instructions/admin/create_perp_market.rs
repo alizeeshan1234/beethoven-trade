@@ -4,6 +4,8 @@ use crate::error::ErrorCode;
 use crate::events::PerpMarketCreated;
 use crate::state::{Exchange, PerpMarket};
 
+use anchor_spl::token::{TokenAccount, Token, Mint};
+
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct CreatePerpMarketParams {
     pub market_index: u16,
@@ -36,10 +38,10 @@ pub struct CreatePerpMarket<'info> {
     pub perp_market: Account<'info, PerpMarket>,
 
     /// The base token mint (e.g., SOL)
-    pub base_mint: Account<'info, anchor_spl::token::Mint>,
+    pub base_mint: Account<'info, Mint>,
 
     /// The quote token mint (e.g., USDC)
-    pub quote_mint: Account<'info, anchor_spl::token::Mint>,
+    pub quote_mint: Account<'info, Mint>,
 
     /// CHECK: Pyth oracle price feed account, validated by CPI at runtime
     pub oracle: UncheckedAccount<'info>,

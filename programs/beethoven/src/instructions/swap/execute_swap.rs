@@ -6,6 +6,8 @@ use crate::math::fixed_point::bps_mul;
 use crate::adapters::swap_adapter;
 use crate::state::{Exchange, UserAccount, VaultState};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct ExecuteSwapParams {
     pub amount_in: u64,
@@ -34,11 +36,11 @@ pub struct ExecuteSwap<'info> {
 
     /// User's input token account
     #[account(mut)]
-    pub user_input_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_input_token_account: Account<'info, TokenAccount>,
 
     /// User's output token account
     #[account(mut)]
-    pub user_output_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_output_token_account: Account<'info, TokenAccount>,
 
     /// Vault for fee collection on input token
     #[account(
@@ -52,9 +54,9 @@ pub struct ExecuteSwap<'info> {
         mut,
         constraint = vault_token_account.key() == vault_state.token_account @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler<'info>(

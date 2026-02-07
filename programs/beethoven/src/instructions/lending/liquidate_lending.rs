@@ -8,6 +8,8 @@ use crate::math::liquidation::compute_lending_health_factor;
 use crate::math::oracle::get_price;
 use crate::state::{Exchange, LendingPool, LendingPosition, VaultState};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct LiquidateLending<'info> {
     #[account(mut)]
@@ -47,20 +49,20 @@ pub struct LiquidateLending<'info> {
         mut,
         constraint = vault_token_account.key() == lending_pool.vault @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     /// Liquidator repays debt from this account
     #[account(mut)]
-    pub liquidator_repay_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub liquidator_repay_token_account: Account<'info, TokenAccount>,
 
     /// Liquidator receives collateral to this account
     #[account(mut)]
-    pub liquidator_receive_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub liquidator_receive_token_account: Account<'info, TokenAccount>,
 
     /// CHECK: Pyth oracle price feed
     pub oracle: UncheckedAccount<'info>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<LiquidateLending>, repay_amount: u64) -> Result<()> {

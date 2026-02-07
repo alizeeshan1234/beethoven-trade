@@ -5,6 +5,8 @@ use crate::events::LiquidityRemoved;
 use crate::adapters::deposit_adapter;
 use crate::state::{Exchange, UserAccount};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct RemoveLiquidity<'info> {
     #[account(mut)]
@@ -26,9 +28,9 @@ pub struct RemoveLiquidity<'info> {
 
     /// User's token account for receiving the withdrawal
     #[account(mut)]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler<'info>(

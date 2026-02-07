@@ -9,6 +9,8 @@ use crate::math::oracle::get_price;
 use crate::state::{Exchange, PerpMarket, PerpPosition, UserAccount, VaultState};
 use crate::state::perp_position::PositionSide;
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct ClosePosition<'info> {
     #[account(mut)]
@@ -59,15 +61,15 @@ pub struct ClosePosition<'info> {
         mut,
         constraint = vault_token_account.key() == vault_state.token_account @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     #[account(
         mut,
         constraint = user_token_account.owner == owner.key() @ ErrorCode::Unauthorized,
     )]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<ClosePosition>) -> Result<()> {

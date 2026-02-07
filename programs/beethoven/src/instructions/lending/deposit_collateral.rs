@@ -4,7 +4,7 @@ use crate::error::ErrorCode;
 use crate::events::CollateralDeposited;
 use crate::math::interest::accrue_interest;
 use crate::state::{Exchange, LendingPool, LendingPosition, UserAccount};
-
+use anchor_spl::token::{TokenAccount, Token};
 #[derive(Accounts)]
 pub struct DepositCollateral<'info> {
     #[account(mut)]
@@ -46,16 +46,16 @@ pub struct DepositCollateral<'info> {
         mut,
         constraint = vault_token_account.key() == lending_pool.vault @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     #[account(
         mut,
         constraint = user_token_account.owner == owner.key() @ ErrorCode::Unauthorized,
         constraint = user_token_account.mint == lending_pool.mint @ ErrorCode::InvalidParameter,
     )]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
 }
 

@@ -6,6 +6,9 @@ use crate::math::liquidation::compute_liquidation_price;
 use crate::math::oracle::get_price;
 use crate::state::{Exchange, PerpMarket, PerpPosition, UserAccount};
 use crate::state::perp_position::PositionSide;
+use crate::state::VaultState;
+
+use anchor_spl::token::{TokenAccount, Token};
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct OpenPositionParams {
@@ -67,19 +70,19 @@ pub struct OpenPosition<'info> {
         mut,
         constraint = user_token_account.owner == owner.key() @ ErrorCode::Unauthorized,
     )]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
     /// Vault token account (collateral destination)
     #[account(mut)]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     #[account(
         seeds = [VAULT_SEED, perp_market.quote_mint.as_ref()],
         bump,
     )]
-    pub vault_state: Account<'info, crate::state::VaultState>,
+    pub vault_state: Account<'info, VaultState>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
 }
 

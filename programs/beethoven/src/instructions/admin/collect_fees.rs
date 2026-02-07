@@ -4,6 +4,8 @@ use crate::error::ErrorCode;
 use crate::events::FeesCollected;
 use crate::state::{Exchange, VaultState};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct CollectFees<'info> {
     #[account(mut)]
@@ -27,13 +29,13 @@ pub struct CollectFees<'info> {
         mut,
         constraint = vault_token_account.key() == vault_state.token_account @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     /// The admin's token account to receive fees
     #[account(mut)]
-    pub recipient_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub recipient_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<CollectFees>, amount: u64) -> Result<()> {

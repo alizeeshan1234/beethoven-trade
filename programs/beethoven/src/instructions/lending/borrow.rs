@@ -8,6 +8,8 @@ use crate::math::liquidation::compute_lending_health_factor;
 use crate::math::oracle::get_price;
 use crate::state::{Exchange, LendingPool, LendingPosition, VaultState};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(Accounts)]
 pub struct Borrow<'info> {
     #[account(mut)]
@@ -46,18 +48,18 @@ pub struct Borrow<'info> {
         mut,
         constraint = vault_token_account.key() == lending_pool.vault @ ErrorCode::InvalidParameter,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
     #[account(
         mut,
         constraint = user_token_account.owner == owner.key() @ ErrorCode::Unauthorized,
     )]
-    pub user_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub user_token_account: Account<'info, TokenAccount>,
 
     /// CHECK: Pyth oracle price feed
     pub oracle: UncheckedAccount<'info>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
 }
 
 pub fn handler(ctx: Context<Borrow>, amount: u64) -> Result<()> {

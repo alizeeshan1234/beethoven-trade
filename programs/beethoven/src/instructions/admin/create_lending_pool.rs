@@ -5,6 +5,8 @@ use crate::error::ErrorCode;
 use crate::events::LendingPoolCreated;
 use crate::state::{Exchange, LendingPool, VaultState};
 
+use anchor_spl::token::{TokenAccount, Token};
+
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct CreateLendingPoolParams {
     pub pool_index: u16,
@@ -60,9 +62,9 @@ pub struct CreateLendingPool<'info> {
         token::mint = mint,
         token::authority = vault_state,
     )]
-    pub vault_token_account: Account<'info, anchor_spl::token::TokenAccount>,
+    pub vault_token_account: Account<'info, TokenAccount>,
 
-    pub token_program: Program<'info, anchor_spl::token::Token>,
+    pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
 }
