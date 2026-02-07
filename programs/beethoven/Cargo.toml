@@ -1,0 +1,56 @@
+[package]
+name = "beethoven"
+version = "0.1.0"
+description = "Beethoven DEX - Composable DeFi on Solana (swap, perps, lending)"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "beethoven"
+
+[features]
+default = ["manifest-swap", "gamma-swap", "heaven-swap", "kamino-deposit"]
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+# ── Beethoven protocol features ──────────────────────────
+# Each feature enables the corresponding protocol in the beethoven SDK.
+# See: https://blueshift.gg/research/composable-defi-with-beethoven
+#
+# Swap protocols:
+manifest-swap = ["beethoven-sdk/manifest-swap"]
+perena-swap = ["beethoven-sdk/perena-swap"]
+heaven-swap = ["beethoven-sdk/heaven-swap"]
+aldrin-swap = ["beethoven-sdk/aldrin-swap"]
+gamma-swap = ["beethoven-sdk/gamma-swap"]
+solfi-swap = ["beethoven-sdk/solfi-swap"]
+futarchy-swap = ["beethoven-sdk/futarchy-swap"]
+
+# Deposit protocols:
+kamino-deposit = ["beethoven-sdk/kamino-deposit"]
+jupiter-deposit = ["beethoven-sdk/jupiter-deposit"]
+
+
+# Convenience groups:
+all-swap = ["manifest-swap", "perena-swap", "heaven-swap", "aldrin-swap", "gamma-swap", "solfi-swap", "futarchy-swap"]
+all-deposit = ["kamino-deposit", "jupiter-deposit"]
+
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = "0.32.1"
+
+# Beethoven composable DeFi SDK — trait-based CPI routing
+# Protocols are opt-in via feature flags above.
+# See: https://github.com/blueshift-gg/beethoven
+beethoven-sdk = { package = "beethoven", git = "https://github.com/blueshift-gg/beethoven", default-features = false }
+
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
