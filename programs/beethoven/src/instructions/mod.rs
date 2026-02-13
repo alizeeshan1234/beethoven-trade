@@ -3,9 +3,11 @@ pub mod user;
 pub mod swap;
 pub mod perp;
 pub mod lending;
+pub mod fund;
 
 pub use admin::*;
 pub use user::*;
 pub use swap::*;
 pub use perp::*;
 pub use lending::*;
+pub use fund::*;

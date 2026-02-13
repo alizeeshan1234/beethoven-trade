@@ -58,3 +58,29 @@ pub const PYTH_PRICE_EXPO_ADJUSTMENT: i32 = -8; // Pyth typically uses exponent 
 // Position limits
 pub const MAX_PERP_POSITIONS: u8 = 10;
 pub const MAX_LENDING_POSITIONS: u8 = 10;
+
+// Fund PDA seeds
+#[constant]
+pub const FUND_SEED: &[u8] = b"fund";
+#[constant]
+pub const FUND_HOLDING_SEED: &[u8] = b"fund_holding";
+#[constant]
+pub const FUND_PROPOSAL_SEED: &[u8] = b"fund_proposal";
+#[constant]
+pub const FUND_VAULT_SEED: &[u8] = b"fund_vault";
+#[constant]
+pub const SHARE_MINT_SEED: &[u8] = b"share_mint";
+
+// Fund fee limits (in basis points)
+pub const MAX_PERFORMANCE_FEE_BPS: u64 = 2_000; // 20%
+pub const MAX_MANAGEMENT_FEE_BPS: u64 = 500; // 5%
+
+// Fund governance
+pub const MIN_PROPOSAL_SHARES: u64 = 1_000_000; // 1 share token at 6 decimals
+pub const PROPOSAL_VOTING_PERIOD: i64 = 5; // 5 seconds (short for devnet testing; increase for production)
+pub const PROPOSAL_EXECUTION_DEADLINE: i64 = 60; // 60 seconds after voting
+
+// Fund limits
+pub const MAX_FUND_HOLDINGS: u8 = 20;
+pub const MAX_ACTIVE_PROPOSALS: u8 = 10;
+pub const INITIAL_NAV_PER_SHARE: u128 = WAD; // 1.0

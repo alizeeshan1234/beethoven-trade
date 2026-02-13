@@ -87,4 +87,30 @@ pub enum ErrorCode {
     LeverageOutOfBounds,
     #[msg("Insufficient vault balance for withdrawal")]
     InsufficientVaultBalance,
+
+    // Fund (6080-6099)
+    #[msg("Fund is paused")]
+    FundPaused,
+    #[msg("Insufficient shares for operation")]
+    InsufficientShares,
+    #[msg("Maximum active proposals reached")]
+    MaxActiveProposals,
+    #[msg("Maximum fund holdings reached")]
+    MaxFundHoldings,
+    #[msg("Proposal is not in active status")]
+    ProposalNotActive,
+    #[msg("Proposal did not pass")]
+    ProposalNotPassed,
+    #[msg("Proposal has expired past execution deadline")]
+    ProposalExpired,
+    #[msg("Voting period has not ended")]
+    VotingPeriodNotEnded,
+    #[msg("Invalid action data for proposal")]
+    InvalidActionData,
+    #[msg("NAV data is stale, update required")]
+    NavStale,
+    #[msg("Fund is winding down, only withdrawals allowed")]
+    FundWindingDown,
+    #[msg("Insufficient fund liquidity for withdrawal")]
+    InsufficientFundLiquidity,
 }

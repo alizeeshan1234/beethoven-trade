@@ -14,7 +14,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("2JEPZyQpK6HARPgvq1X2ZVh4U9cE7s9rQZ3BpN2Ho3oW");
+declare_id!("571Gb1NtoJbxRxroEpcjMyixG52jJbDy61jw9ebh3d4f");
 
 #[program]
 pub mod beethoven {
@@ -120,5 +120,48 @@ pub mod beethoven {
 
     pub fn liquidate_lending(ctx: Context<LiquidateLending>, repay_amount: u64) -> Result<()> {
         instructions::lending::liquidate_lending::handler(ctx, repay_amount)
+    }
+
+    // ── Fund ──────────────────────────────────────────────────
+
+    pub fn initialize_fund(
+        ctx: Context<InitializeFund>,
+        params: instructions::fund::initialize_fund::InitializeFundParams,
+    ) -> Result<()> {
+        instructions::fund::initialize_fund::handler(ctx, params)
+    }
+
+    pub fn deposit_to_fund(ctx: Context<DepositToFund>, amount: u64) -> Result<()> {
+        instructions::fund::deposit_to_fund::handler(ctx, amount)
+    }
+
+    pub fn withdraw_from_fund(ctx: Context<WithdrawFromFund>, shares: u64) -> Result<()> {
+        instructions::fund::withdraw_from_fund::handler(ctx, shares)
+    }
+
+    pub fn update_fund_nav<'info>(
+        ctx: Context<'_, '_, 'info, 'info, UpdateFundNav<'info>>,
+    ) -> Result<()> {
+        instructions::fund::update_fund_nav::handler(ctx)
+    }
+
+    pub fn create_proposal(
+        ctx: Context<CreateProposal>,
+        params: instructions::fund::create_proposal::CreateProposalParams,
+    ) -> Result<()> {
+        instructions::fund::create_proposal::handler(ctx, params)
+    }
+
+    pub fn finalize_proposal<'info>(
+        ctx: Context<'_, '_, 'info, 'info, FinalizeProposal<'info>>,
+        params: instructions::fund::finalize_proposal::FinalizeProposalParams,
+    ) -> Result<()> {
+        instructions::fund::finalize_proposal::handler(ctx, params)
+    }
+
+    pub fn execute_proposal<'info>(
+        ctx: Context<'_, '_, 'info, 'info, ExecuteProposal<'info>>,
+    ) -> Result<()> {
+        instructions::fund::execute_proposal::handler(ctx)
     }
 }

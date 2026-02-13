@@ -67,6 +67,28 @@ pub mod deposit_protocols {
     pub const JUPITER: Pubkey = pubkey!("7tjE28izRUjzmxC1QNXnNwcc4N82CNYCexf3k8mw67s3");
 }
 
+/// Governance protocol program IDs (MetaDAO)
+#[allow(unused_imports)]
+pub mod governance_protocols {
+    use anchor_lang::solana_program::pubkey::Pubkey;
+    use anchor_lang::pubkey;
+
+    /// MetaDAO Conditional Vault
+    #[cfg(feature = "metadao-governance")]
+    pub const METADAO_CONDITIONAL_VAULT: Pubkey =
+        pubkey!("vAuLTQjV5AZx5f3UgE75wmVDH7tjkN8JhSj6JtAzvpv");
+
+    /// MetaDAO Autocrat
+    #[cfg(feature = "metadao-governance")]
+    pub const METADAO_AUTOCRAT: Pubkey =
+        pubkey!("autoQPBLBgbkKfpwBqDnr4KhQohxBASzLbgifsKPjzp");
+
+    /// MetaDAO AMM (for TWAP reading)
+    #[cfg(feature = "metadao-governance")]
+    pub const METADAO_AMM: Pubkey =
+        pubkey!("AMMyu9GhLABSfCAbTkkyJjBQz9aVz5VYqer1rLnRPump");
+}
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum SwapProtocol {
     #[cfg(feature = "manifest-swap")]

@@ -5,6 +5,9 @@ pub mod perp_position;
 pub mod lending_pool;
 pub mod lending_position;
 pub mod vault;
+pub mod fund;
+pub mod fund_holding;
+pub mod proposal;
 
 pub use exchange::*;
 pub use user_account::*;
@@ -13,3 +16,6 @@ pub use perp_position::*;
 pub use lending_pool::*;
 pub use lending_position::*;
 pub use vault::*;
+pub use fund::*;
+pub use fund_holding::*;
+pub use proposal::*;

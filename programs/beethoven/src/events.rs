@@ -149,3 +149,72 @@ pub struct FeesCollected {
     pub recipient: Pubkey,
     pub timestamp: i64,
 }
+
+// Fund events
+#[event]
+pub struct FundInitialized {
+    pub fund: Pubkey,
+    pub admin: Pubkey,
+    pub quote_mint: Pubkey,
+    pub share_mint: Pubkey,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct FundDeposit {
+    pub fund: Pubkey,
+    pub depositor: Pubkey,
+    pub amount: u64,
+    pub shares_minted: u64,
+    pub nav_per_share: u128,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct FundWithdrawal {
+    pub fund: Pubkey,
+    pub withdrawer: Pubkey,
+    pub shares_burned: u64,
+    pub amount_returned: u64,
+    pub nav_per_share: u128,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct NavUpdated {
+    pub fund: Pubkey,
+    pub total_nav: u128,
+    pub nav_per_share: u128,
+    pub total_shares: u64,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct ProposalCreated {
+    pub fund: Pubkey,
+    pub proposal: Pubkey,
+    pub proposer: Pubkey,
+    pub proposal_index: u64,
+    pub action_type: u8,
+    pub voting_end: i64,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct ProposalFinalized {
+    pub fund: Pubkey,
+    pub proposal: Pubkey,
+    pub passed: bool,
+    pub pass_twap: u128,
+    pub fail_twap: u128,
+    pub timestamp: i64,
+}
+
+#[event]
+pub struct ProposalExecuted {
+    pub fund: Pubkey,
+    pub proposal: Pubkey,
+    pub action_type: u8,
+    pub executor: Pubkey,
+    pub timestamp: i64,
+}

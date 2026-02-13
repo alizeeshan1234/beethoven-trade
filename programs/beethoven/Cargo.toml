@@ -9,7 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "beethoven"
 
 [features]
-default = ["manifest-swap", "gamma-swap", "heaven-swap", "kamino-deposit", "jupiter-deposit"]
+default = ["manifest-swap", "gamma-swap", "heaven-swap", "kamino-deposit", "jupiter-deposit", "metadao-governance"]
 cpi = ["no-entrypoint"]
 no-entrypoint = []
 no-idl = []
@@ -35,6 +35,9 @@ futarchy-swap = ["beethoven-sdk/futarchy-swap"]
 # Deposit protocols:
 kamino-deposit = ["beethoven-sdk/kamino-deposit"]
 jupiter-deposit = ["beethoven-sdk/jupiter-deposit"]
+
+# Governance protocols:
+metadao-governance = []
 
 
 # Convenience groups:
