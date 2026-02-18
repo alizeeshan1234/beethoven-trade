@@ -25,7 +25,6 @@ pub const MAX_SWAP_FEE_BPS: u64 = 100; // 1%
 pub const MAX_PERP_FEE_BPS: u64 = 50; // 0.5%
 pub const MAX_LENDING_FEE_BPS: u64 = 200; // 2%
 
-// Leverage limits
 pub const MIN_LEVERAGE: u64 = 1;
 pub const MAX_LEVERAGE: u64 = 50;
 pub const DEFAULT_MAX_LEVERAGE: u64 = 20;
