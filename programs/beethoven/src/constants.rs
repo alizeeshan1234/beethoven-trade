@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 
-// PDA Seeds
 #[constant]
 pub const EXCHANGE_SEED: &[u8] = b"exchange";
 #[constant]
@@ -16,13 +15,10 @@ pub const LENDING_POSITION_SEED: &[u8] = b"lending_position";
 #[constant]
 pub const VAULT_SEED: &[u8] = b"vault";
 
-// WAD precision (1e18) for fixed-point math
 pub const WAD: u128 = 1_000_000_000_000_000_000;
 
-// Price precision (1e6) matching USDC decimals
 pub const PRICE_PRECISION: u64 = 1_000_000;
 
-// Basis points denominator
 pub const BPS_DENOMINATOR: u64 = 10_000;
 
 // Fee limits (in basis points)
