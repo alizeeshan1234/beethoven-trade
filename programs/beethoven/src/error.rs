@@ -2,7 +2,6 @@ use anchor_lang::prelude::*;
 
 #[error_code]
 pub enum ErrorCode {
-    // General (6000-6009)
     #[msg("Math overflow")]
     MathOverflow,
     #[msg("Math underflow")]
