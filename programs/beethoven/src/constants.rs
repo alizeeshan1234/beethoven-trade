@@ -21,7 +21,6 @@ pub const PRICE_PRECISION: u64 = 1_000_000;
 
 pub const BPS_DENOMINATOR: u64 = 10_000;
 
-// Fee limits (in basis points)
 pub const MAX_SWAP_FEE_BPS: u64 = 100; // 1%
 pub const MAX_PERP_FEE_BPS: u64 = 50; // 0.5%
 pub const MAX_LENDING_FEE_BPS: u64 = 200; // 2%
