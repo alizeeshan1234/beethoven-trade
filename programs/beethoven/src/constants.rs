@@ -79,4 +79,4 @@ pub const PROPOSAL_EXECUTION_DEADLINE: i64 = 60; // 60 seconds after voting
 // Fund limits
 pub const MAX_FUND_HOLDINGS: u8 = 20;
 pub const MAX_ACTIVE_PROPOSALS: u8 = 10;
-pub const INITIAL_NAV_PER_SHARE: u128 = WAD; // 1.0
+pub const INITIAL_NAV_PER_SHARE: u128 = WAD; 
